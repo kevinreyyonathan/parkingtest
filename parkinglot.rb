@@ -29,4 +29,28 @@ class ParkingLot
 
 		result
 	end
+	
+	def get_slot_no_by_reg_no(reg_no)
+		slots.each_with_index do |slot, idx|
+			next unless slot
+
+			return (idx+1).to_s if slot.reg_no == reg_no
+		end
+	
+		nil
+	end
+
+	
+	def get_slot_no_by_color(color)
+		result=[]
+		slots.each_with_index do |slot, idx|
+			next unless slot
+	
+			result << (idx+1).to_s if slot.color == color
+		end
+
+		result
+	end
+
+end
 
