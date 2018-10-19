@@ -16,4 +16,7 @@ class parkingLot
 		slot[slot_num] = car
 	end
 
-	
+	def leave(slot_num)
+		slot[slot_num] = nil
+	end
+
