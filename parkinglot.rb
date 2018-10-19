@@ -12,5 +12,8 @@ class parkingLot
 		nil
 	end
 
-	
+	def park(car:, slot_num:)
+		slot[slot_num] = car
+	end
 
+	
