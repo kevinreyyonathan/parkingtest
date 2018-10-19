@@ -2,6 +2,7 @@ class ParkingSystem
 	attr_accessor :parking_lot
 	attr_reader :input , :input_path
 
+	#handling user input
 	def recv_user_input
 		@input = STDIN.gets.strip
 	end
@@ -99,7 +100,7 @@ class ParkingSystem
 		print_result('Slot number ' + num_in_str + ' is free')
 	end
 	
-
+	#two statement command input
 	def two_statement_command(splitted_input)
     	if splitted_input[0] == 'create_parking_lot'
       		size = splitted_input[1]
@@ -118,7 +119,8 @@ class ParkingSystem
       		print_result result
     	end
   	end
-
+	
+	#three statement command input
 	def three_statement_command(splitted_input)
 		slot_no = parking_lot
 		
@@ -127,7 +129,7 @@ class ParkingSystem
 					slot_no: slot_no)
 	end
 
-	
+	#parsing user input
 	def parse_user_input
 		splitted_input = input.split
 		if splitted_input.size == 1
@@ -139,16 +141,30 @@ class ParkingSystem
 		end
 	end
 
-	
+	#getting user input as input
 	def interactive_mode
 		parse_user_input while recv_user_input
 	end
 	
+	#input from a file
 	def file_mode
 		input_file = File.open(input_path, 'r')
 		
 		input_file.each_line do |line|
 			@input = line
 			parse_user_input
+		end
+	end
+	
+	#private functions
+	private
+	
+	def exit_execution
+		print_result 'Argument is not integer, check again'
+		exit 1
+	end
+	
+	def set_input_path(filename)
+		@input_path = File.join(File.dirname(__FILE__), '../' + filename)
 		end
 	end
