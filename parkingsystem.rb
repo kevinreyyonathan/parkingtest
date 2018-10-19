@@ -99,3 +99,56 @@ class ParkingSystem
 		print_result('Slot number ' + num_in_str + ' is free')
 	end
 	
+
+	def two_statement_command(splitted_input)
+    	if splitted_input[0] == 'create_parking_lot'
+      		size = splitted_input[1]
+     		create_parking_lot(size)
+      		print_result('Created a parking lot with ' + size.to_s + ' slots')
+    	elsif splitted_input[0] == 'leave'
+			leave_process(splitted_input[1])
+   		elsif splitted_input[0] == 'registration_numbers_for_cars_with_colour'
+      		result = registration_numbers_by_color(splitted_input[1])
+      		print_result result
+    	elsif splitted_input[0] == 'slot_numbers_for_cars_with_colour'
+     		result = slot_numbers_by_color(splitted_input[1])
+      		print_result result
+    	elsif splitted_input[0] == 'slot_number_for_registration_number'
+      		result = slot_num_by_registration_number(splitted_input[1])
+      		print_result result
+    	end
+  	end
+
+	def three_statement_command(splitted_input)
+		slot_no = parking_lot
+		
+		park_check(reg_no: splitted_input[1],
+					color: splitted_input[2],
+					slot_no: slot_no)
+	end
+
+	
+	def parse_user_input
+		splitted_input = input.split
+		if splitted_input.size == 1
+			print_table
+		elsif splitted_input.size == 2
+			two_statement_command(splitted_input)
+		elsif splitted_input.size == 3
+			three_statement_command(splitted_input)
+		end
+	end
+
+	
+	def interactive_mode
+		parse_user_input while recv_user_input
+	end
+	
+	def file_mode
+		input_file = File.open(input_path, 'r')
+		
+		input_file.each_line do |line|
+			@input = line
+			parse_user_input
+		end
+	end
