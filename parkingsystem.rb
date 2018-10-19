@@ -11,6 +11,7 @@ class ParkingSystem
 		parking_lot.leave slot_no
 	end
 	
+	#printing output
 	def print_result(output)
 		puts output
 	end
@@ -39,7 +40,7 @@ class ParkingSystem
 		result_string
 	end
 
-
+	#initiating parking lot
 	def create_parking_lot(size_in_str)
 		size_in_int = str_to_int(size_in_str)
 		@parking_lot = ParkingLot.new(size_in_int)
